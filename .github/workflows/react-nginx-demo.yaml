@@ -23,6 +23,8 @@ jobs:
       # Step 1: Checkout/download the repository code
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-tags: true
 
       - name: print variables
         run: |
