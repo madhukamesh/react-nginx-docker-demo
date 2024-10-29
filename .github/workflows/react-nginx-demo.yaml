@@ -90,6 +90,6 @@ jobs:
         shell: bash
         run: |
           git config --global user.name "github-actions[bot]"
-          git config --global user.email "kamesh-a@gmail.com"
+          git config --global user.email "github-actions[bot]"
           git tag "${{ steps.get_latest_tag.outputs.latest_tag }}"
           git push origin "${{ steps.get_latest_tag.outputs.latest_tag }}"
