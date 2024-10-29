@@ -85,3 +85,11 @@ jobs:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
+
+      - name: Push latest tag
+        shell: bash
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions@bot.com"
+          git tag "${{ steps.get_latest_tag.outputs.latest_tag }}"
+          git push origin "${{ steps.get_latest_tag.outputs.latest_tag }}"
