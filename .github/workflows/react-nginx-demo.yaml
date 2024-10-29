@@ -45,6 +45,22 @@ jobs:
             username: ${{ github.actor }}
             password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Get latest Tag
+        id: get_latest_tag
+        shell: bash
+        run: |
+          latest_version=$(git describe --tags --abbrev=0)
+          if [ -z "$latest_version" ]; then
+            echo "No tags found"
+            latest_version="v1"
+            echo "latest_tag=$latest_version" >> $GITHUB_OUTPUT
+          else
+            echo "Latest tag is $latest_version" # v1
+            version_number=$(echo "$latest_version" | awk -F'v' '{print $2}') #1
+            new_version=v$(( version_number + 1 )) # v2
+            echo "latest_tag=$new_version" >> $GITHUB_OUTPUT
+          fi
+
       # Step 4: Creates tags for docker image
       - name: Extract Docker metadata
         id: meta
@@ -54,6 +70,7 @@ jobs:
             ghcr.io/${{ github.repository }}
           tags: |
             ${{ github.sha }}
+            ${{ steps.get_latest_tag.outputs.latest_tag }}
             type=ref,event=branch
             type=ref,event=tag
             type=raw,value=latest
