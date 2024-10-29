@@ -61,7 +61,7 @@ jobs:
             version_number=$(echo "$latest_version" | awk -F'v' '{print $2}') #1
             new_version=v$(( version_number + 1 )) # v2
             echo "latest_tag=$new_version" >> $GITHUB_OUTPUT
-            echo "latest tag version is : $latest_tag"
+            echo "latest version is : $latest_tag"
           fi
 
       # Step 4: Creates tags for docker image
