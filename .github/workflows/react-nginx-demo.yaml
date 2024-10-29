@@ -23,8 +23,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-          fetch-tags: true
+          fetch-depth: 0 # Fetch all history for tags
+          fetch-tags: true # Fetch all tags
 
       - name: print variables
         run: |
